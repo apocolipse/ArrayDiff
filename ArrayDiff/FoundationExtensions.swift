@@ -24,20 +24,22 @@ public extension IndexSet {
 	deletes in descending order and inserts in ascending order.
 	*/
 	public func indexPathsInSection(_ section: Int, ascending: Bool = true) -> [IndexPath] {
+        guard !self.isEmpty else { return [] }
+        
 		var result: [IndexPath] = []
 		result.reserveCapacity(count)
 
-    if ascending {
-      forEach { index in
-        result.append(IndexPath(indexes: [section, index]))
-      }
-    } else {
-      reversed().forEach { index in
-        result.append(IndexPath(indexes: [section, index]))
-      }
+        if ascending {
+            forEach { index in
+                result.append(IndexPath(indexes: [section, index]))
+            }
+        } else {
+            reversed().forEach { index in
+                result.append(IndexPath(indexes: [section, index]))
+            }
+        }
+        return result
     }
-		return result
-	}
 }
 
 // MARK: NSIndexSet support
